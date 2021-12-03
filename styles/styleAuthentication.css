@@ -1,0 +1,85 @@
+/* styleAuthentication.css */
+
+.auth-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-card-container {
+  height: 80%;
+  width: 450px;
+  margin-top: 50px;
+  background-color: burlywood;
+  border-radius: 25px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.text-title {
+  margin-top: 20px;
+  margin-bottom: 60px;
+  color:black;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.button-login {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  font-weight: bold !important;
+}
+
+.link-style {
+  font-weight: 300;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.link-register {
+  color: black;
+}
+
+.link-register:hover {
+  opacity: 75%;
+  color: black;
+}
+
+.link-forgot-pwd {
+  float: right;
+  color: white;
+}
+
+.link-forgot-pwd:hover {
+  opacity: 75%;
+  color: white;
+}
+
+.container-forgot-pwd {
+  margin-top: 50px;
+}
+
+.card-forgot-pwd {
+  height: fit-content !important;
+  padding-bottom: 80px !important;
+}
+
+.button-forgot-pwd {
+  margin-top: 10px !important;
+}
+
+.forgot-pwd-txt {
+  font-size: 14px;
+  margin-top: -20px;
+  margin-bottom: 40px;
+}
