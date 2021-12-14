@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 
 import Link from "next/link";
 
-class Edit extends Component {
+class Register extends Component {
   state = {
     username: "",
     email: "",
@@ -130,21 +130,21 @@ class Edit extends Component {
 
   handleSendForm = () => {
     axios
-      .post("https://api-kel3.herokuapp.com/update", {
+      .post("https://api-kel3.herokuapp.com/auth/register", {
         username: this.state.username,
         email: this.state.email,
         password: this.state.password,
         nama: this.state.nama,
         umur: this.state.umur,
-      }, {headers: { 'content-type': 'application/json;charset=UTF-8', Authorization: localStorage.getItem('token') }})
+      })
       .then((res) => {
         console.log(res);
         swal({
           title: "Success!",
-          text: "Edit Player Berhasil",
+          text: "Register Berhasil",
           icon: "success"
         })
-        router.push(`/`);
+        router.push("/login");
       })
       .catch((error) => {
         console.log(error);
@@ -167,7 +167,7 @@ class Edit extends Component {
       <Fragment>
         <div className="auth-container">
           <div className="auth-card-container">
-            <h4 className="text-title">Edit Player</h4>
+            <h4 className="text-title">Sign Up</h4>
             <div className="panel panel-default">
                <FormErrors formErrors={this.state.formErrors} />
             </div>
@@ -212,6 +212,9 @@ class Edit extends Component {
                 onClick={!this.state.isLoading ? this.handleSubmit : null}>
                 {this.state.isLoading ? "Loading…" : "SUBMIT"}
               </Button>
+              <Link href="/login">
+                <a className="link-style link-register">Already have an account? Sign In</a>
+              </Link>
             </form>
           </div>
         </div>
@@ -220,4 +223,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default Register;

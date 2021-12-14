@@ -7,24 +7,16 @@ import swal from 'sweetalert';
 
 import Link from "next/link";
 
-class Edit extends Component {
+class ForgotPassword extends Component {
   state = {
-    username: "",
     email: "",
-    password: "",
-    nama: "",
-    umur: "",
     isLoading: false,
   };
 
   constructor (props) {
     super(props);
     this.state = {
-      username: '',
       email: '',
-      password: '',
-      nama: '',
-      umur: '',
       formErrors: {username: '', password: '', email: '', nama: '', umur: ''},
       usernameCheck: false,
       emailValid: false,
@@ -64,26 +56,10 @@ class Edit extends Component {
 
 
     switch(fieldName) {
-      case 'username':
-        usernameCheck = value.length >= 1;
-        fieldValidationErrors.username = usernameCheck ? '' : ' required';
-        break;
       case 'email':
           emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
           fieldValidationErrors.email = emailValid ? '' : ' is invalid format';
           break;
-      case 'password':
-        passwordValid = value.length >= 3;
-        fieldValidationErrors.password = passwordValid ? '': ' is too short';
-        break;
-      case 'nama':
-          nameCheck = value.length >= 1;
-          fieldValidationErrors.nama = nameCheck ? '' : ' required';
-          break;
-      case 'umur':
-        umurCheck = value.match(/^[0-9]*$/);
-        fieldValidationErrors.umur = umurCheck ? '' : ' is invalid format';
-        break;
       default:
         break;
     }
@@ -97,8 +73,7 @@ class Edit extends Component {
   }
 
   validateForm() {
-    this.setState({formValid: this.state.usernameCheck && this.state.passwordValid 
-      && this.state.emailValid && this.state.nameCheck && this.state.umurCheck
+    this.setState({formValid:this.state.emailValid
     });
   }
 
@@ -130,18 +105,14 @@ class Edit extends Component {
 
   handleSendForm = () => {
     axios
-      .post("https://api-kel3.herokuapp.com/update", {
-        username: this.state.username,
+      .post("https://api-kel3.herokuapp.com/forgot-password", {
         email: this.state.email,
-        password: this.state.password,
-        nama: this.state.nama,
-        umur: this.state.umur,
-      }, {headers: { 'content-type': 'application/json;charset=UTF-8', Authorization: localStorage.getItem('token') }})
+      })
       .then((res) => {
         console.log(res);
         swal({
           title: "Success!",
-          text: "Edit Player Berhasil",
+          text: "Berhasil Mengirim E-Mail Link Reset Password",
           icon: "success"
         })
         router.push(`/`);
@@ -150,7 +121,7 @@ class Edit extends Component {
         console.log(error);
         swal({
           title: "Failed!",
-          text: "Username atau Email Telah Terdaftar",
+          text: "E-mail Tidak Terdaftar",
           icon: "error"
         })
         this.setState({ isLoading: false });
@@ -167,44 +138,17 @@ class Edit extends Component {
       <Fragment>
         <div className="auth-container">
           <div className="auth-card-container">
-            <h4 className="text-title">Edit Player</h4>
+            <h4 className="text-title">Forgot Password</h4>
+            <p className="forgot-pwd-txt">Please Fill Your E-mail Below </p>
             <div className="panel panel-default">
                <FormErrors formErrors={this.state.formErrors} />
             </div>
             <form id="form" className="form-container" onSubmit= {this.submitRegisterForm}>
               <div className="mb-3">
-                {/* <input type="text" className="form-control" name="username" placeholder="Username" onChange={this.handleChange} /> */}
-                <input type="username" required className="form-control" name="username"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleUserInput}  />
-              </div>
-              <div className="mb-3">
                 {/* <input type="email" className="form-control" name="email" placeholder="Email" onChange={this.handleChange} /> */}
                 <input type="email" required className="form-control" name="email"
                 placeholder="Email"
                 value={this.state.email}
-                onChange={this.handleUserInput}  />
-              </div>
-              <div className="mb-3">
-                {/* <input type="password" className="form-control" name="password" placeholder="Password" onChange={this.handleChange} /> */}
-                <input type="password" className="form-control" name="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleUserInput}  />
-              </div>
-              <div className="mb-3">
-                {/* <input type="text" className="form-control" name="nama" placeholder="Nama" onChange={this.handleChange} /> */}
-                <input type="nama" required className="form-control" name="nama"
-                placeholder="Nama"
-                value={this.state.nama}
-                onChange={this.handleUserInput}  />
-              </div>
-              <div className="mb-3">
-                {/* <input type="number" className="form-control" name="umur" placeholder="Umur" onChange={this.handleChange} /> */}
-                <input type="umur" required className="form-control" name="umur"
-                placeholder="Umur"
-                value={this.state.umur}
                 onChange={this.handleUserInput}  />
               </div>
               <Button className="btn btn-dark button-login" 
@@ -220,4 +164,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default ForgotPassword;

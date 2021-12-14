@@ -1,0 +1,232 @@
+/* Font */
+/* :root {
+    font-size: 62.5%;
+} */
+
+.container {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+    height: 100vh;
+    width: 100%;
+    background-color: #9C835F;
+    ;
+}
+
+.container h1 {
+    font-size: 8rem;
+    font-family: 'Bebas Neue';
+    font-weight: bold;
+}
+
+.container h2 {
+    font-size: 3.6rem;
+    font-family: 'Bebas Neue';
+    font-weight: bold;
+}
+
+.container h3 {
+    font-size: 2.4rem;
+    font-family: 'Bebas Neue';
+    font-weight: bold;
+}
+
+.container nav {
+    font-size: 1.2rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.container body {
+    font-size: 1.8rem;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container sub {
+    font-size: 1.4rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container button {
+    font-size: 1.6rem !important;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+.container header {
+    text-transform: uppercase;
+}
+
+.container a {
+    text-decoration: none !important;
+    color: black;
+}
+
+/* Content */
+
+/* .item {
+    border-style: solid;
+    border-color: blue;
+} */
+.topnav {
+    display: grid;
+    grid-gap: 1em;
+}
+
+.topnav div {
+    display: grid;
+    place-items: center;
+}
+
+.topnav h2 {
+    word-spacing: 0.5em;
+    letter-spacing: 0.2em;
+    color: #ffb548;
+}
+
+.content {
+    display: grid;
+    place-items: center;
+}
+
+.suit {
+    display: grid;
+    height: 90%;
+    max-height: 90%;
+    width: 60%;
+    max-width: 60;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+#mid {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 90% 10%;
+}
+
+#player,
+#com {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto(object-fit) 30% 30% 30%;
+}
+
+#refresh {
+    display: flex;
+}
+
+#refresh>div img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    transition: transform 2s;
+}
+
+#refresh>div img:hover {
+    animation-name: rotate; 
+    animation-duration: 4s; 
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.midbar {
+    display: grid;
+    place-items: center;
+    grid-template-rows: 10% auto;
+}
+
+.midbar>div h1 {
+    font-size: 14.4rem;
+}
+
+#score h1{
+    font-size:5rem;
+    letter-spacing: 1rem;
+    text-align: center;
+}
+
+#player>div img,
+#com>div img {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.hover,
+#refresh>div img {
+    cursor: pointer;
+}
+
+.hover:hover {
+    background-color: #c4c4c4;
+}
+
+.chosen{
+    background-color: #c4c4c4 ;
+}
+
+#player>div,
+#com>div {
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    height: 200px;
+    width: 200px;
+    padding: 0.5em;
+    margin: 1em;
+}
+
+#result-container {
+    display: grid;
+    height: 30%;
+    width: 90%;
+    place-items: center;
+    border-radius: 10px;
+    justify-items: center;
+    text-align: center;
+}
+
+#result-text {
+    color: #bd0000;
+}
+
+#result-win{
+    color: white;
+    font-size: 80px;
+}
+
+#result-container-win {
+    display: grid;
+    height: 30%;
+    width: 90%;
+    place-items: center;
+    border-radius: 10px;
+    justify-items: center;
+    text-align: center;
+    transform: rotate(-20deg);
+}
+
+.draw{
+    background-color: green;
+}
+.win{
+    background-color: #4c9653;
+}
+
+.grey {
+    background-color: #c4c4c4;
+}
+
+.spacing{
+    word-spacing: 100vw;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}

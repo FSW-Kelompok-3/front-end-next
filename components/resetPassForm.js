@@ -4,27 +4,22 @@ import axios from "axios";
 import router from "next/router";
 import { FormErrors } from './FormErrors';
 import swal from 'sweetalert';
-
 import Link from "next/link";
 
-class Edit extends Component {
+
+class ResetPassword extends Component {
+  
   state = {
-    username: "",
-    email: "",
     password: "",
-    nama: "",
-    umur: "",
+    confirmP: "",
     isLoading: false,
   };
 
   constructor (props) {
     super(props);
     this.state = {
-      username: '',
-      email: '',
       password: '',
-      nama: '',
-      umur: '',
+      confirmP: '',
       formErrors: {username: '', password: '', email: '', nama: '', umur: ''},
       usernameCheck: false,
       emailValid: false,
@@ -56,49 +51,31 @@ class Edit extends Component {
 
   validateField(fieldName, value) {
     let fieldValidationErrors = this.state.formErrors;
-    let usernameCheck = this.state.usernameCheck;
-    let emailValid = this.state.emailValid;
     let passwordValid = this.state.passwordValid;
-    let nameCheck = this.state.nameCheck;
-    let umurCheck = this.state.umurCheck;
+    let confirmPValid = this.state.confirmPValid;
 
 
     switch(fieldName) {
-      case 'username':
-        usernameCheck = value.length >= 1;
-        fieldValidationErrors.username = usernameCheck ? '' : ' required';
-        break;
-      case 'email':
-          emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-          fieldValidationErrors.email = emailValid ? '' : ' is invalid format';
-          break;
       case 'password':
         passwordValid = value.length >= 3;
         fieldValidationErrors.password = passwordValid ? '': ' is too short';
         break;
-      case 'nama':
-          nameCheck = value.length >= 1;
-          fieldValidationErrors.nama = nameCheck ? '' : ' required';
+        case 'confirmP':
+          confirmPValid = value.length >= 3;
+          fieldValidationErrors.password = confirmPValid ? '': ' is too short';
           break;
-      case 'umur':
-        umurCheck = value.match(/^[0-9]*$/);
-        fieldValidationErrors.umur = umurCheck ? '' : ' is invalid format';
-        break;
       default:
         break;
     }
     this.setState({formErrors: fieldValidationErrors,
-                    usernameCheck: usernameCheck,
-                    emailValid: emailValid,
                     passwordValid: passwordValid,
-                    nameCheck: nameCheck,
-                    umurCheck: umurCheck 
+                    confirmPValid : confirmPValid,
                   }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({formValid: this.state.usernameCheck && this.state.passwordValid 
-      && this.state.emailValid && this.state.nameCheck && this.state.umurCheck
+    this.setState({formValid: this.state.passwordValid 
+      && this.state.confirmPValid
     });
   }
 
@@ -129,19 +106,17 @@ class Edit extends Component {
   };
 
   handleSendForm = () => {
+    const { id, token } = router.query;
     axios
-      .post("https://api-kel3.herokuapp.com/update", {
-        username: this.state.username,
-        email: this.state.email,
+      .post(`https://api-kel3.herokuapp.com/reset-password/${id}/${token}`, {
         password: this.state.password,
-        nama: this.state.nama,
-        umur: this.state.umur,
+        confirmP: this.state.confirmP
       }, {headers: { 'content-type': 'application/json;charset=UTF-8', Authorization: localStorage.getItem('token') }})
       .then((res) => {
         console.log(res);
         swal({
           title: "Success!",
-          text: "Edit Player Berhasil",
+          text: "Success Reset Password",
           icon: "success"
         })
         router.push(`/`);
@@ -150,7 +125,7 @@ class Edit extends Component {
         console.log(error);
         swal({
           title: "Failed!",
-          text: "Username atau Email Telah Terdaftar",
+          text: "Password And Confirm Password is not same",
           icon: "error"
         })
         this.setState({ isLoading: false });
@@ -167,25 +142,11 @@ class Edit extends Component {
       <Fragment>
         <div className="auth-container">
           <div className="auth-card-container">
-            <h4 className="text-title">Edit Player</h4>
+            <h4 className="text-title">Reset Password</h4>
             <div className="panel panel-default">
                <FormErrors formErrors={this.state.formErrors} />
             </div>
             <form id="form" className="form-container" onSubmit= {this.submitRegisterForm}>
-              <div className="mb-3">
-                {/* <input type="text" className="form-control" name="username" placeholder="Username" onChange={this.handleChange} /> */}
-                <input type="username" required className="form-control" name="username"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleUserInput}  />
-              </div>
-              <div className="mb-3">
-                {/* <input type="email" className="form-control" name="email" placeholder="Email" onChange={this.handleChange} /> */}
-                <input type="email" required className="form-control" name="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleUserInput}  />
-              </div>
               <div className="mb-3">
                 {/* <input type="password" className="form-control" name="password" placeholder="Password" onChange={this.handleChange} /> */}
                 <input type="password" className="form-control" name="password"
@@ -195,16 +156,9 @@ class Edit extends Component {
               </div>
               <div className="mb-3">
                 {/* <input type="text" className="form-control" name="nama" placeholder="Nama" onChange={this.handleChange} /> */}
-                <input type="nama" required className="form-control" name="nama"
-                placeholder="Nama"
-                value={this.state.nama}
-                onChange={this.handleUserInput}  />
-              </div>
-              <div className="mb-3">
-                {/* <input type="number" className="form-control" name="umur" placeholder="Umur" onChange={this.handleChange} /> */}
-                <input type="umur" required className="form-control" name="umur"
-                placeholder="Umur"
-                value={this.state.umur}
+                <input type="password" required className="form-control" name="confirmP"
+                placeholder="Confirm Password"
+                value={this.state.confirmP}
                 onChange={this.handleUserInput}  />
               </div>
               <Button className="btn btn-dark button-login" 
@@ -220,4 +174,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default ResetPassword;
