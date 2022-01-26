@@ -1,72 +1,98 @@
-import React, { Component, Fragment } from "react";
-import { Container, Spinner, Table } from "reactstrap";
+import React, { Component } from 'react';
+import { Container, Spinner, Table } from 'reactstrap';
+import Image from 'next/image';
 import Router from 'next/router';
-import axios from "axios";
+import axios from 'axios';
 
 class PlayerInfo extends Component {
-  state = {
-    loading: true,
-    person: "null",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      person: 'null',
+    };
+  }
 
   async componentDidMount() {
     const { id } = Router.query;
     axios
       .get(`https://api-kel3.herokuapp.com/infoPlayer/${id}`)
       .then((res) => {
-        console.log(res.data);
         this.setState({ person: res.data, loading: false });
-      })
-      .catch((error) => {
-        console.log(error);
       });
   }
 
   render() {
+    const { loading, person } = this.state;
     return (
-      <Fragment>
-
       <div className="search-container">
         <Container className="p-4">
           <div>
-            {this.state.loading || !this.state.person ? (
-              <Spinner color="dark" className="mx-auto d-block">       
+            {loading || !person ? (
+              <Spinner color="dark" className="mx-auto d-block">
                 Loading...
               </Spinner>
             ) : (
               <div>
-                <h1 className="text-center">Profile And Score {this.state.person.username}</h1>
+                <h1 className="text-center">
+                  Profile And Score
+                  {' '}
+                  {person.username}
+                </h1>
+                <div className="d-flex justify-content-center m-4">
+
+                  <Image
+                    src={!person.url ? 'https://res.cloudinary.com/dkqxlkrj5/image/upload/v1643038776/profil_image/profilnull_weqlng.png' : person.url}
+                    className="img-fluid rounded"
+                    width={200}
+                    height={200}
+                  />
+                </div>
                 <Table borderless responsive striped size="sm">
                   <tbody>
                     <tr>
                       <th className="th-lg">Username</th>
-                      <td>: {this.state.person.username}</td>
+                      <td>
+                        :
+                        {person.username}
+                      </td>
                     </tr>
                     <tr>
                       <th>Nama</th>
-                      <td>: {this.state.person.nama}</td>
+                      <td>
+                        :
+                        {person.nama}
+                      </td>
                     </tr>
                     <tr>
                       <th>Email</th>
-                      <td>: {this.state.person.email}</td>
+                      <td>
+                        :
+                        {person.email}
+                      </td>
                     </tr>
                     <tr>
                       <th>Umur</th>
-                      <td>: {this.state.person.umur}</td>
+                      <td>
+                        :
+                        {person.umur}
+                      </td>
                     </tr>
                     <tr>
                       <th>Score</th>
-                      <td>: {this.state.person.score}</td>
+                      <td>
+                        :
+                        {person.score}
+                      </td>
                     </tr>
                   </tbody>
                 </Table>
               </div>
             )}
           </div>
-        
+
         </Container>
-        </div>
-      </Fragment>
+      </div>
     );
   }
 }

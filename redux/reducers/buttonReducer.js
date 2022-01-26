@@ -1,14 +1,14 @@
 const initialState = {
-  isLoading: false
+  isLoading: false,
 };
 
 export default (state = initialState, action = {}) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'BUTTON_LOADING':
       return { ...state, isLoading: true };
     case 'BUTTON_NOT_LOADING':
       return { ...state, isLoading: false };
     default:
-      return {...state};
+      return { ...state };
   }
-}
+};

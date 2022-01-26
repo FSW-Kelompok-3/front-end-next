@@ -1,12 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React from 'react';
 
-
-import ForgotPassword from "../components/forgotPassForm";
+import ForgotPassword from '../components/forgotPassForm';
 
 export default function ForgotPage() {
   return (
-    <Fragment>
-      <ForgotPassword />
-    </Fragment>
-  )
+    <ForgotPassword />
+  );
 }

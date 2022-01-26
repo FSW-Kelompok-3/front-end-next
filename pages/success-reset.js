@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from "react";
+import React from 'react';
 
 import Navbar from '../components/navbar';
-import SuccessReset from "../components/successResetForm";
+import SuccessReset from '../components/successResetForm';
 
 export default function SuccessResetPage() {
   return (
-    <Fragment>
+    <>
       <Navbar />
       <SuccessReset />
-    </Fragment>
-  )
+    </>
+  );
 }

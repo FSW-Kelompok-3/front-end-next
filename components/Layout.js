@@ -1,13 +1,13 @@
-import Navbar from "./navbar";
-//import Footer from "./Footer"
+import Navbar from './navbar';
+// import Footer from "./Footer"
 
-const Layout = ({ children }) => {
+function Layout({ children }) {
   return (
     <div className="content">
       <Navbar />
       {children}
     </div>
   );
-};
+}
 
 export default Layout;

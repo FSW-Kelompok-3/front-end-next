@@ -8,7 +8,7 @@ const initialState = {
   currentUserId: [],
   round: 1,
   score: 0,
-  history: []
+  history: [],
 };
 
 export default (state = initialState, action = {}) => {
@@ -34,14 +34,14 @@ export default (state = initialState, action = {}) => {
     case 'Get_Current_User_Id':
       return { ...state, currentUserId: action.payload };
     case 'ROUND_INCREMENT':
-      return { ...state, round: state.round + 1 }
+      return { ...state, round: state.round + 1 };
     case 'SCORE_INCREMENT':
-      return { ...state, score: state.score + 1 }
+      return { ...state, score: state.score + 1 };
     case 'SCORE_DECREMENT':
-      return { ...state, score: state.score - 1 }
+      return { ...state, score: state.score - 1 };
     case 'PUSH':
-      return { ...state, history: [...state.history, action.payload] }
+      return { ...state, history: [...state.history, action.payload] };
     default:
       return { ...state };
   }
-}
+};
